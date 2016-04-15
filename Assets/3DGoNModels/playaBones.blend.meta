@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: dead358414e51e845b74a676b94f4388
+timeCreated: 1460519206
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature_002
+    100004: Bone
+    100006: Chest
+    100008: FootLeft
+    100010: FootRight
+    100012: Hand_001
+    100014: Hand_002
+    100016: Hand_003
+    100018: Hand_004
+    100020: Hand_005
+    100022: Hand_006
+    100024: Hand_007
+    100026: Hand_008
+    100028: Hand_009
+    100030: Hand_010
+    100032: Hand_011
+    100034: Hand_012
+    100036: Hand_013
+    100038: Hand_014
+    100040: Hand_015
+    100042: Hand_017
+    100044: Hand_018
+    100046: Hand_019
+    100048: Hand_020
+    100050: Hand_021
+    100052: Hand_022
+    100054: Hand_023
+    100056: Hand_024
+    100058: Hand_025
+    100060: Hand_026
+    100062: Hand_027
+    100064: Hand_028
+    100066: Hand_029
+    100068: Hand_030
+    100070: Hand_031
+    100072: HandLeft
+    100074: HandRight
+    100076: Head
+    100078: Hips
+    100080: LeftLeg
+    100082: LowerArmLeft
+    100084: LowerArmRight
+    100086: LowerLegLeft
+    100088: LowerLegRight
+    100090: Neck
+    100092: //RootNode
+    100094: Player
+    100096: RightLeg
+    100098: ShoulderLeft
+    100100: ShoulderRight
+    100102: Spine
+    100104: UpperArmLeft
+    100106: UpperArmRight
+    400000: Armature
+    400002: Armature_002
+    400004: Bone
+    400006: Chest
+    400008: FootLeft
+    400010: FootRight
+    400012: Hand_001
+    400014: Hand_002
+    400016: Hand_003
+    400018: Hand_004
+    400020: Hand_005
+    400022: Hand_006
+    400024: Hand_007
+    400026: Hand_008
+    400028: Hand_009
+    400030: Hand_010
+    400032: Hand_011
+    400034: Hand_012
+    400036: Hand_013
+    400038: Hand_014
+    400040: Hand_015
+    400042: Hand_017
+    400044: Hand_018
+    400046: Hand_019
+    400048: Hand_020
+    400050: Hand_021
+    400052: Hand_022
+    400054: Hand_023
+    400056: Hand_024
+    400058: Hand_025
+    400060: Hand_026
+    400062: Hand_027
+    400064: Hand_028
+    400066: Hand_029
+    400068: Hand_030
+    400070: Hand_031
+    400072: HandLeft
+    400074: HandRight
+    400076: Head
+    400078: Hips
+    400080: LeftLeg
+    400082: LowerArmLeft
+    400084: LowerArmRight
+    400086: LowerLegLeft
+    400088: LowerLegRight
+    400090: Neck
+    400092: //RootNode
+    400094: Player
+    400096: RightLeg
+    400098: ShoulderLeft
+    400100: ShoulderRight
+    400102: Spine
+    400104: UpperArmLeft
+    400106: UpperArmRight
+    4300000: Player
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: Player
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
