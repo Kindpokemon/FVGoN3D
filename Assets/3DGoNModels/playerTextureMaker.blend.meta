@@ -1,0 +1,201 @@
+fileFormatVersion: 2
+guid: a2a99f8fc7c67c94fb34807038489e46
+timeCreated: 1460737779
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: DEF-finger_index_01_L_02
+    100002: DEF-finger_index_01_R
+    100004: DEF-finger_index_02_L
+    100006: DEF-finger_index_02_L_end
+    100008: DEF-finger_index_02_R
+    100010: DEF-finger_index_02_R_end
+    100012: DEF-finger_middle_01_L_02
+    100014: DEF-finger_middle_01_R
+    100016: DEF-finger_middle_02_L
+    100018: DEF-finger_middle_02_L_end
+    100020: DEF-finger_middle_02_R
+    100022: DEF-finger_middle_02_R_end
+    100024: DEF-finger_pinky_01_L_02
+    100026: DEF-finger_pinky_01_R
+    100028: DEF-finger_pinky_02_L
+    100030: DEF-finger_pinky_02_L_end
+    100032: DEF-finger_pinky_02_R
+    100034: DEF-finger_pinky_02_R_end
+    100036: DEF-finger_ring_01_L_02
+    100038: DEF-finger_ring_01_R
+    100040: DEF-finger_ring_02_L
+    100042: DEF-finger_ring_02_L_end
+    100044: DEF-finger_ring_02_R
+    100046: DEF-finger_ring_02_R_end
+    100048: DEF-forearm_L_01
+    100050: DEF-forearm_R
+    100052: DEF-hand_L
+    100054: DEF-hand_R
+    100056: DEF-shin_L_01
+    100058: DEF-shin_R_01
+    100060: DEF-shoulder_L
+    100062: DEF-shoulder_R
+    100064: DEF-thigh_L_01
+    100066: DEF-thigh_R_01
+    100068: DEF-thumb_01_L_02
+    100070: DEF-thumb_01_R
+    100072: DEF-thumb_02_L
+    100074: DEF-thumb_02_L_end
+    100076: DEF-thumb_02_R
+    100078: DEF-thumb_02_R_end
+    100080: DEF-upper_arm_L_01
+    100082: DEF-upper_arm_R
+    100084: foot_L
+    100086: foot_R
+    100088: head
+    100090: head_end
+    100092: heel_02_L
+    100094: heel_02_L_end
+    100096: heel_02_R
+    100098: heel_02_R_end
+    100100: heel_L
+    100102: heel_R
+    100104: metarig
+    100106: neck
+    100108: ORG-hips
+    100110: ORG-ribs
+    100112: Player
+    100114: //RootNode
+    100116: spine
+    100118: toe_L
+    100120: toe_L_end
+    100122: toe_R
+    100124: toe_R_end
+    400000: DEF-finger_index_01_L_02
+    400002: DEF-finger_index_01_R
+    400004: DEF-finger_index_02_L
+    400006: DEF-finger_index_02_L_end
+    400008: DEF-finger_index_02_R
+    400010: DEF-finger_index_02_R_end
+    400012: DEF-finger_middle_01_L_02
+    400014: DEF-finger_middle_01_R
+    400016: DEF-finger_middle_02_L
+    400018: DEF-finger_middle_02_L_end
+    400020: DEF-finger_middle_02_R
+    400022: DEF-finger_middle_02_R_end
+    400024: DEF-finger_pinky_01_L_02
+    400026: DEF-finger_pinky_01_R
+    400028: DEF-finger_pinky_02_L
+    400030: DEF-finger_pinky_02_L_end
+    400032: DEF-finger_pinky_02_R
+    400034: DEF-finger_pinky_02_R_end
+    400036: DEF-finger_ring_01_L_02
+    400038: DEF-finger_ring_01_R
+    400040: DEF-finger_ring_02_L
+    400042: DEF-finger_ring_02_L_end
+    400044: DEF-finger_ring_02_R
+    400046: DEF-finger_ring_02_R_end
+    400048: DEF-forearm_L_01
+    400050: DEF-forearm_R
+    400052: DEF-hand_L
+    400054: DEF-hand_R
+    400056: DEF-shin_L_01
+    400058: DEF-shin_R_01
+    400060: DEF-shoulder_L
+    400062: DEF-shoulder_R
+    400064: DEF-thigh_L_01
+    400066: DEF-thigh_R_01
+    400068: DEF-thumb_01_L_02
+    400070: DEF-thumb_01_R
+    400072: DEF-thumb_02_L
+    400074: DEF-thumb_02_L_end
+    400076: DEF-thumb_02_R
+    400078: DEF-thumb_02_R_end
+    400080: DEF-upper_arm_L_01
+    400082: DEF-upper_arm_R
+    400084: foot_L
+    400086: foot_R
+    400088: head
+    400090: head_end
+    400092: heel_02_L
+    400094: heel_02_L_end
+    400096: heel_02_R
+    400098: heel_02_R_end
+    400100: heel_L
+    400102: heel_R
+    400104: metarig
+    400106: neck
+    400108: ORG-hips
+    400110: ORG-ribs
+    400112: Player
+    400114: //RootNode
+    400116: spine
+    400118: toe_L
+    400120: toe_L_end
+    400122: toe_R
+    400124: toe_R_end
+    4300000: Player
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: Player
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

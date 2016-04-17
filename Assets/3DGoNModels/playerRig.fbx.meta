@@ -1004,6 +1004,23 @@ ModelImporter:
     101992: VIS-DEF-thigh.L.01_pole.ik_end
     101994: VIS-DEF-thigh.R.01_pole.ik
     101996: VIS-DEF-thigh.R.01_pole.ik_end
+    101998: Camera
+    102000: DEF-finger_index.02.L_end_end
+    102002: DEF-finger_index.02.R_end_end
+    102004: DEF-finger_middle.02.L_end_end
+    102006: DEF-finger_middle.02.R_end_end
+    102008: DEF-finger_pinky.02.L_end_end
+    102010: DEF-finger_pinky.02.R_end_end
+    102012: DEF-finger_ring.02.L_end_end
+    102014: DEF-finger_ring.02.R_end_end
+    102016: DEF-thumb.02.L_end_end
+    102018: DEF-thumb.02.R_end_end
+    102020: head_end_end
+    102022: heel.02.L_end_end
+    102024: heel.02.R_end_end
+    102026: Lamp
+    102028: toe.L_end_end
+    102030: toe.R_end_end
     400000: chest
     400002: DEF-chest
     400004: DEF-chest_end
@@ -2003,6 +2020,23 @@ ModelImporter:
     401992: VIS-DEF-thigh.L.01_pole.ik_end
     401994: VIS-DEF-thigh.R.01_pole.ik
     401996: VIS-DEF-thigh.R.01_pole.ik_end
+    401998: Camera
+    402000: DEF-finger_index.02.L_end_end
+    402002: DEF-finger_index.02.R_end_end
+    402004: DEF-finger_middle.02.L_end_end
+    402006: DEF-finger_middle.02.R_end_end
+    402008: DEF-finger_pinky.02.L_end_end
+    402010: DEF-finger_pinky.02.R_end_end
+    402012: DEF-finger_ring.02.L_end_end
+    402014: DEF-finger_ring.02.R_end_end
+    402016: DEF-thumb.02.L_end_end
+    402018: DEF-thumb.02.R_end_end
+    402020: head_end_end
+    402022: heel.02.L_end_end
+    402024: heel.02.R_end_end
+    402026: Lamp
+    402028: toe.L_end_end
+    402030: toe.R_end_end
     2300000: Player
     3300000: Player
     4300000: Player
