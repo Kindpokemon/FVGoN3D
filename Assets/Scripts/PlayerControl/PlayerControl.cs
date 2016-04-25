@@ -28,12 +28,17 @@ public class PlayerControl : MonoBehaviour {
 		if (movementEnabled) {
 			moveH = Input.GetAxis ("Horizontal");
 			moveV = Input.GetAxis ("Vertical");
-			anim.SetFloat("InputY", moveV, 1f, Time.deltaTime * 10f);
-			anim.SetFloat("InputX", moveH, 1f, Time.deltaTime * 10f);
+			anim.SetFloat ("InputY", moveV, 1f, Time.deltaTime * 10f);
+			anim.SetFloat ("InputX", moveH, 1f, Time.deltaTime * 10f);
 			anim.SetBool ("Crouching", Input.GetButton ("Crouch"));
 			anim.SetBool ("Sprinting", Input.GetButton ("Sprint"));
-			anim.SetBool ("Grounded", IsGrounded ());
+		} else {
+			anim.SetFloat ("InputY", 0, 1f, Time.deltaTime * 10f);
+			anim.SetFloat ("InputX", 0, 1f, Time.deltaTime * 10f);
+			anim.SetBool ("Crouching", false);
+			anim.SetBool ("Sprinting", false);
 		}
+		anim.SetBool ("Grounded", IsGrounded ());
 		if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()){
 			
 		}

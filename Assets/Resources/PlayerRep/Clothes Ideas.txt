@@ -1,0 +1,43 @@
+Mafia:
+Pinstripe Hat
+Pinstripe Overcoat
+Pinstripe Suit Pants
+Dress Shoes
+
+Inspector:
+Deer Stalker
+Trench Coat
+Black Dress Pants
+Dress Shoes
+
+Thug:
+Jayne Hat
+White Shirt
+Assless Chaps
+Sneakers
+
+Sleuth:
+Fedora
+Black Dress Shirt
+Black Dress Pants
+Dress Shoes
+
+Professor:
+Glasses
+Grey Suit Jacket
+Grey Suit Pants
+Dress Shoes
+
+Agent:
+Shades
+White Suit Jacket
+White Suit Pants
+Dress Shoes
+
+Sorcerer:
+Wizard Hat
+Robe
+Underpants
+Sandals
+
+
