@@ -23,6 +23,10 @@ public class AIController : MonoBehaviour {
 	public float runDistance;
 	public float fleeDistance;
 	public float runMult;
+	public float crouchMult;
+
+	public float normalHeight;
+	public float crouchHeight;
 
 	public GameObject target;
 	public CapsuleCollider hideFinder;
@@ -113,11 +117,24 @@ public class AIController : MonoBehaviour {
 		}
 
 		if (Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) >= runDistance) {
-			agent.speed = runMult * moveSpeed;
 			anim.SetBool ("Sprint", true);
 		} else {
 			agent.speed = moveSpeed;
 			anim.SetBool ("Sprint", false);
+		}
+
+		if (anim.GetBool ("Sprint") == true) {
+			agent.speed = moveSpeed * runMult;
+		} else if (anim.GetBool ("Crouch") == true) {
+			agent.speed = moveSpeed * crouchMult;
+		} else {
+			agent.speed = moveSpeed;
+		}
+
+		if (anim.GetBool ("Crouch") == true) {
+			agent.height = crouchHeight;
+		} else {
+			agent.height = hei
 		}
 
 		if (worldDeltaPosition.magnitude > agent.radius) {
