@@ -95,6 +95,7 @@
      <Compile Include="Assets\Scripts\World Inventories\ChestDetails.cs" />
      <Compile Include="Assets\Scripts\World Inventories\ChestSlotScript.cs" />
      <Compile Include="Assets\Scripts\WorldStuff\DayNight.cs" />
+     <Compile Include="Assets\Scripts\WorldStuff\HidingSpotInfo.cs" />
      <Compile Include="Assets\Spawnspot.cs" />
      <Compile Include="Assets\Steer2D\Examples\Assets\Target.cs" />
      <Compile Include="Assets\Steer2D\Scripts\Arrive.cs" />

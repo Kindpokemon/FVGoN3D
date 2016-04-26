@@ -32,6 +32,9 @@ public class AIController : MonoBehaviour {
 	public CapsuleCollider hideFinder;
 
 	public bool shouldMove;
+	public bool shouldCrouch;
+
+	RaycastHit hit;
 
 	public enum CurrentAI {
 		Idle,
@@ -63,15 +66,41 @@ public class AIController : MonoBehaviour {
 
 	void Update ()
 	{
+		if (!Physics.Raycast (transform.position, Vector3.up, normalHeight)) {
+			if (target != null) {
+				if (target.tag == "Player") {
+					if (target.GetComponent<PlayerControl> ().anim.GetBool ("Crouching")) {
+						if (target.GetComponent<PlayerControl> ().moving && target.GetComponent<PlayerControl> ().anim.GetBool ("Sprinting")) {
+							shouldCrouch = false;
+						} else {
+							shouldCrouch = true;
+						}
+					} else {
+						shouldCrouch = false;
+					}
+				} else if (target.tag == "NPC") {
+					if (target.GetComponent<AIController> ().anim.GetBool ("Crouch")) {
+						shouldCrouch = true;
+					} else {
+						shouldCrouch = false;
+					}
+				} else {
+					shouldCrouch = false;
+				}
+			}
+		}
 		agent.stoppingDistance = maxDistance;
-
 		if (currentAI == CurrentAI.Follow) {
 			maxDistance = normalDistance;
-			MovementCalc (target.transform.position);
+			MovementCalc (target.transform.position, shouldCrouch);
 		} else if (currentAI == CurrentAI.Hide) {
 			if (HideAtSpot () != null) {
 				agent.stoppingDistance = 0;
-				MovementCalc (HideAtSpot ().transform.position);
+				if (HideAtSpot ().GetComponent<HidingSpotInfo> ().hideHeight < normalHeight) {
+					MovementCalc (HideAtSpot ().transform.position, true);
+				} else {
+					MovementCalc (HideAtSpot ().transform.position, false);
+				}
 			} else {
 				currentAI = CurrentAI.Flee;
 			}
@@ -86,9 +115,35 @@ public class AIController : MonoBehaviour {
 		transform.position = position;
 	}
 
-	void MovementCalc(Vector3 targetPos){
+	void MovementCalc(Vector3 targetPos, bool crouch){
+
 		agent.destination = targetPos;
 		worldDeltaPosition = agent.nextPosition - transform.position;
+		if (crouch) {
+			anim.SetBool ("Crouch", true);
+		} else {
+			anim.SetBool ("Crouch", false);
+		}
+
+		if (Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) >= runDistance && !anim.GetBool("Crouch")) {
+			anim.SetBool ("Sprint", true);
+		} else {
+			anim.SetBool ("Sprint", false);
+		}
+
+		if (anim.GetBool ("Sprint") == true) {
+			agent.speed = moveSpeed * runMult;
+		} else if (anim.GetBool ("Crouch") == true) {
+			agent.speed = moveSpeed * crouchMult;
+		} else {
+			agent.speed = moveSpeed;
+		}
+
+		if (anim.GetBool ("Crouch") == true) {
+			agent.height = crouchHeight;
+		} else {
+			agent.height = normalHeight;
+		}
 
 		// Map 'worldDeltaPosition' to local space
 		float dx = Vector3.Dot (transform.right, worldDeltaPosition);
@@ -115,27 +170,6 @@ public class AIController : MonoBehaviour {
 			anim.SetFloat ("Y", 0, 1f, Time.deltaTime * 10f);
 		}
 
-		if (Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) >= runDistance) {
-			anim.SetBool ("Sprint", true);
-		} else {
-			agent.speed = moveSpeed;
-			anim.SetBool ("Sprint", false);
-		}
-
-		if (anim.GetBool ("Sprint") == true) {
-			agent.speed = moveSpeed * runMult;
-		} else if (anim.GetBool ("Crouch") == true) {
-			agent.speed = moveSpeed * crouchMult;
-		} else {
-			agent.speed = moveSpeed;
-		}
-
-		if (anim.GetBool ("Crouch") == true) {
-			agent.height = crouchHeight;
-		} else {
-			agent.height = normalHeight;
-		}
-
 		if (worldDeltaPosition.magnitude > agent.radius) {
 			transform.position = agent.nextPosition - .9f * worldDeltaPosition;
 		}
@@ -148,10 +182,12 @@ public class AIController : MonoBehaviour {
 			float minDist = Mathf.Infinity;
 			Vector3 currentPos = transform.position;
 			foreach (Transform t in reflist.hidingSpots) {
-				float dist = Vector3.Distance (t.position, currentPos);
-				if (dist < minDist) {
-					tMin = t;
-					minDist = dist;
+				if (t.GetComponent<HidingSpotInfo> ().hideHeight >= crouchHeight || t.GetComponent<HidingSpotInfo> ().hideHeight >= normalHeight) {
+					float dist = Vector3.Distance (t.position, currentPos);
+					if (dist < minDist) {
+						tMin = t;
+						minDist = dist;
+					}
 				}
 			}
 			return tMin.gameObject;

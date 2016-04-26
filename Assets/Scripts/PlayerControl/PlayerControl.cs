@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour {
 	public float distToGround;
 	float moveH;
 	float moveV;
+	bool crouch;
 
 	//Disabling/Enabling
 	public bool movementEnabled;
@@ -31,14 +32,18 @@ public class PlayerControl : MonoBehaviour {
 			Debug.Log (moveH + ", " + moveV);
 			anim.SetFloat ("InputY", moveV, 1f, Time.deltaTime * 10f);
 			anim.SetFloat ("InputX", moveH, 1f, Time.deltaTime * 10f);
-			anim.SetBool ("Crouching", Input.GetButton ("Crouch"));
+			if (Input.GetButtonDown ("Crouch")) {
+				crouch = !crouch;
+			}
+			anim.SetBool ("Crouching", crouch);
 			anim.SetBool ("Sprinting", Input.GetButton ("Sprint"));
 		} else {
 			anim.SetFloat ("InputY", 0, 1f, Time.deltaTime * 10f);
 			anim.SetFloat ("InputX", 0, 1f, Time.deltaTime * 10f);
-			anim.SetBool ("Crouching", false);
 			anim.SetBool ("Sprinting", false);
+			anim.SetBool ("Crouching", false);
 		}
+
 		anim.SetBool ("Grounded", IsGrounded ());
 		if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()){
 			
