@@ -105,7 +105,6 @@ public class AIController : MonoBehaviour {
 
 		shouldMove = velocity.magnitude > 0.5f && agent.remainingDistance > agent.radius && agent.remainingDistance > agent.stoppingDistance;
 		// Update animation parameters
-		Debug.Log(Vector3.Distance(previousPosition,agent.nextPosition));
 		if (shouldMove || Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) > agent.remainingDistance) {
 			if (Vector3.Distance (previousPosition, agent.nextPosition) != 0) {
 				anim.SetFloat ("Y", 1f, 1f, Time.deltaTime * 10f);
@@ -134,7 +133,7 @@ public class AIController : MonoBehaviour {
 		if (anim.GetBool ("Crouch") == true) {
 			agent.height = crouchHeight;
 		} else {
-			agent.height = hei
+			agent.height = normalHeight;
 		}
 
 		if (worldDeltaPosition.magnitude > agent.radius) {
