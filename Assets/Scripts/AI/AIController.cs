@@ -66,7 +66,7 @@ public class AIController : MonoBehaviour {
 
 	void Update ()
 	{
-		if (!Physics.Raycast (transform.position, Vector3.up, normalHeight)) {
+		if (!Physics.Raycast (transform.position, Vector3.up, normalHeight, 8)) {
 			if (target != null) {
 				if (target.tag == "Player") {
 					if (target.GetComponent<PlayerControl> ().anim.GetBool ("Crouching")) {
