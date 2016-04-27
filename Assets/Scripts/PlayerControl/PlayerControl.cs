@@ -37,6 +37,10 @@ public class PlayerControl : MonoBehaviour {
 			}
 			anim.SetBool ("Crouching", crouch);
 			anim.SetBool ("Sprinting", Input.GetButton ("Sprint"));
+			if (anim.GetBool ("Sprinting") && anim.GetBool ("Crouching")) {
+				crouch = false;
+				anim.SetBool ("Crouching", false);
+			}
 		} else {
 			anim.SetFloat ("InputY", 0, 1f, Time.deltaTime * 10f);
 			anim.SetFloat ("InputX", 0, 1f, Time.deltaTime * 10f);

@@ -43,7 +43,8 @@ public class AIController : MonoBehaviour {
 		Attack,
 		Hide,
 		SneakAttack,
-		Flee
+		Flee,
+		ShieldWall
 	}
 	public CurrentAI currentAI;
 	public enum Aggression {
@@ -53,6 +54,20 @@ public class AIController : MonoBehaviour {
 		Aggressive
 	}
 	public Aggression aggression;
+	public enum AttackStyle {
+		None,
+		Charge,
+		Sneak,
+		Block
+	}
+	public AttackStyle attackStyle;
+	public enum DeathType{
+		Die,
+		Kneel,
+		Invincible,
+		Explode
+	}
+	public DeathType deathType;
 
 	void Start ()
 	{
@@ -66,6 +81,7 @@ public class AIController : MonoBehaviour {
 
 	void Update ()
 	{
+		GetComponent<CapsuleCollider> ().center = new Vector3(GetComponent<CapsuleCollider> ().center.x,GetComponent<CapsuleCollider> ().height/2,GetComponent<CapsuleCollider> ().center.z);
 		if (!Physics.Raycast (transform.position, Vector3.up, normalHeight, 8)) {
 			if (target != null) {
 				if (target.tag == "Player") {
@@ -104,6 +120,8 @@ public class AIController : MonoBehaviour {
 			} else {
 				currentAI = CurrentAI.Flee;
 			}
+		} else if (currentAI == CurrentAI.Idle) {
+			
 		}
 	}
 
@@ -141,8 +159,10 @@ public class AIController : MonoBehaviour {
 
 		if (anim.GetBool ("Crouch") == true) {
 			agent.height = crouchHeight;
+			GetComponent<CapsuleCollider> ().height = crouchHeight;
 		} else {
 			agent.height = normalHeight;
+			GetComponent<CapsuleCollider> ().height = normalHeight;
 		}
 
 		// Map 'worldDeltaPosition' to local space
