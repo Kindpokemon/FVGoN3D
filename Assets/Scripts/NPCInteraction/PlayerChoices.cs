@@ -13,6 +13,8 @@ public class PlayerChoices : MonoBehaviour {
 	public int currentScale;
 	public GameObject text;
 	public DialogueController dialogueController;
+	public int choiceChooser;
+	public NPCCharacter npccharacter;
 
 	void Start(){
 
@@ -21,41 +23,11 @@ public class PlayerChoices : MonoBehaviour {
 	}
 
 	public void MakeAGoddamnChoice(){
+		Debug.Log (chatButton);
+		Debug.Log (choiceChooser);
+		Debug.Log (npccharacter);
 
-
-		dialogueController.UpdateDialogue (this.chatButton);
+		dialogueController.ChoiceResponse (chatButton, choiceChooser, npccharacter);
 	}
 
-	public void OnMouseEnter(){
-		Debug.Log("Enter");
-		gameObject.transform.localScale += new Vector3(.5F,.5F,0);
-		if (chatButton == 0) {
-			gameObject.transform.position += new Vector3(0,10,0);
-		} else if (chatButton == 1) {
-			gameObject.transform.position += new Vector3(10,0,0);
-		} else if (chatButton == 2) {
-			gameObject.transform.position -= new Vector3(0,10,0);
-		} else if (chatButton == 3) {
-			gameObject.transform.position -= new Vector3(10,0,0);
-		} else {
-			Debug.Log("Goddamn it, Morty, you broke the code!");
-		}
-	}
-	
-	public void OnMouseExit(){
-		Debug.Log("Exit");
-		gameObject.transform.localScale -= new Vector3(.5F,.5F,0);
-		if (chatButton == 0) {
-			gameObject.transform.position -= new Vector3(0,10,0);
-		} else if (chatButton == 1) {
-			gameObject.transform.position -= new Vector3(10,0,0);
-		} else if (chatButton == 2) {
-			gameObject.transform.position += new Vector3(0,10,0);
-		} else if (chatButton == 3) {
-			gameObject.transform.position += new Vector3(10,0,0);
-		} else {
-			Debug.Log("Goddamn it, Morty, you broke the code!");
-		}
-		
-	}
 }

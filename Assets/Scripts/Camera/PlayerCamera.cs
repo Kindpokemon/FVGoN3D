@@ -80,7 +80,7 @@ public class PlayerCamera : MonoBehaviour {
 			playerCam.transform.localPosition = new Vector3 (0, 0, -distance + .2f);
 		}
 		Debug.DrawRay (lookSpot.transform.position, target.transform.forward, Color.blue, 16f);
-		if (Physics.Raycast (lookSpot.transform.position, transform.forward, out hit, 8f)) {
+		if (Physics.Raycast (lookSpot.transform.position, transform.forward, out hit, 16f)) {
 			if (hit.transform.gameObject.tag == "ChestCollider") {
 				chest.chestImTouching = hit.transform.parent.gameObject;
 				chest.details = chest.chestImTouching.GetComponent<ChestDetails> ();

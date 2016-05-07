@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\MovementSystem\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\ChatArray.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\DialogueController.cs" />
+     <Compile Include="Assets\Scripts\NPCInteraction\LookAt.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\NPC.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\NPCCharacter.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\PlayerChoices.cs" />

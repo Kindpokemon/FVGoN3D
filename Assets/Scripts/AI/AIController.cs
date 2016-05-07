@@ -7,10 +7,12 @@ public class AIController : MonoBehaviour {
 	public string npcName;
 	public string displayName;
 	public float moveSpeed = 3.5f;
+	public Transform head;
 
 	Quaternion targetRotation;
 	ReferenceList reflist;
 	NavMeshAgent agent;
+	LookAt lookAt;
 	Vector2 smoothDeltaPosition = Vector2.zero;
 	Vector3 worldDeltaPosition;
 	Vector2 velocity = Vector2.zero;
@@ -24,6 +26,9 @@ public class AIController : MonoBehaviour {
 	public float fleeDistance;
 	public float runMult;
 	public float crouchMult;
+	public int[] wanderWait = new int[2];
+	public int[] wanderRange = new int[2];
+	public float currentWait;
 
 	public float normalHeight;
 	public float crouchHeight;
@@ -33,6 +38,8 @@ public class AIController : MonoBehaviour {
 
 	public bool shouldMove;
 	public bool shouldCrouch;
+	public bool looking;
+	private Vector3 lookAtPosition;
 
 	RaycastHit hit;
 
@@ -74,9 +81,30 @@ public class AIController : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		agent = GetComponent<NavMeshAgent> ();
 		reflist = GameObject.FindGameObjectWithTag ("reflist").GetComponent<ReferenceList>();
+		lookAt = GetComponent<LookAt> ();
 		// Don’t update position automatically
 		agent.updatePosition = false;
 		anim.applyRootMotion = false;
+	}
+
+	Vector3 FleePosition(float fleeDist){
+		Vector3 spotCalc = new Vector3();
+		if (Vector3.Distance (agent.destination, target.transform.position) < fleeDist) {
+			Vector3 direction = (target.transform.position - transform.position).normalized;
+			spotCalc = target.transform.position + (-fleeDist * direction);
+		} else {
+			spotCalc = agent.destination;
+		}
+		Debug.Log (spotCalc);
+		return spotCalc;
+	}
+
+	public Vector3 RandomNavSphere (Vector3 origin, float distance, int layermask) {
+		Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
+		randomDirection += origin;
+		NavMeshHit navHit;
+		NavMesh.SamplePosition (randomDirection, out navHit, distance, layermask);
+		return navHit.position;
 	}
 
 	void Update ()
@@ -108,20 +136,37 @@ public class AIController : MonoBehaviour {
 		agent.stoppingDistance = maxDistance;
 		if (currentAI == CurrentAI.Follow) {
 			maxDistance = normalDistance;
-			MovementCalc (target.transform.position, shouldCrouch);
+			MovementCalc (target.transform.position, shouldCrouch, false);
 		} else if (currentAI == CurrentAI.Hide) {
 			if (HideAtSpot () != null) {
 				agent.stoppingDistance = 0;
 				if (HideAtSpot ().GetComponent<HidingSpotInfo> ().hideHeight < normalHeight) {
-					MovementCalc (HideAtSpot ().transform.position, true);
+					MovementCalc (HideAtSpot ().transform.position, true, false);
 				} else {
-					MovementCalc (HideAtSpot ().transform.position, false);
+					MovementCalc (HideAtSpot ().transform.position, false, false);
 				}
 			} else {
 				currentAI = CurrentAI.Flee;
 			}
+		} else if (currentAI == CurrentAI.Flee) {
+			MovementCalc (FleePosition (fleeDistance), false, false);
+		} else if (currentAI == CurrentAI.Wander) {
+			Vector3 newPos = agent.destination;
+			if (!shouldMove) {
+				if (currentWait <= 0) {
+					currentWait = Random.Range (wanderWait [0], wanderWait [1]);
+					newPos = RandomNavSphere (transform.position, Random.Range (wanderRange [0], wanderRange [1]), 0);
+				} else {
+					currentWait = currentWait - Time.deltaTime;
+				}
+			}
+			MovementCalc (newPos, false, false);
 		} else if (currentAI == CurrentAI.Idle) {
 			
+		}
+
+		if (!shouldMove) {
+			lookAt.lookAtTargetPosition = agent.steeringTarget + transform.forward;
 		}
 	}
 
@@ -133,7 +178,7 @@ public class AIController : MonoBehaviour {
 		transform.position = position;
 	}
 
-	void MovementCalc(Vector3 targetPos, bool crouch){
+	void MovementCalc(Vector3 targetPos, bool crouch, bool forceSprint){
 
 		agent.destination = targetPos;
 		worldDeltaPosition = agent.nextPosition - transform.position;
@@ -143,7 +188,7 @@ public class AIController : MonoBehaviour {
 			anim.SetBool ("Crouch", false);
 		}
 
-		if (Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) >= runDistance && !anim.GetBool("Crouch")) {
+		if (forceSprint || Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) >= runDistance && !anim.GetBool("Crouch")) {
 			anim.SetBool ("Sprint", true);
 		} else {
 			anim.SetBool ("Sprint", false);
