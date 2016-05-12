@@ -7,28 +7,31 @@ public class DialogueController : MonoBehaviour {
 
 
 	public enum DialogueStates{
-
 		Reading,
 		Choosing,
 		Response
-
 	}
-
+	//Reading SHit
 	public DialogueStates dialogueState;
-	public List<string> content = new List<string>();
-	public List<ChatArray> choices = new List<ChatArray> ();
-	public List<ChatArray> contentOverall = new List<ChatArray>();
-	public int currentContent = 0;
-	public string talkingTo;
 	public GameObject NPCInteract;
-	public Character character;
-	public bool chatDone = true;
 	public NPCCharacter NPC;
-	public string choiceString;
-	public GameObject textBox;
+	public Character character;
 	public PlayerMovement playerMovement;
-	public bool canTalk;
 	public InventoryAppearScript invAppear;
+	public GameObject textBox;
+
+	//Dialogue Tracking
+	public DialogueLine currentLine;
+	public DialogueLine lastLine;
+	public DialogueLine nextLine;
+	public Choice currentChoice;
+
+	public bool canInteract = true;
+
+
+	public string talkingTo;
+	public string choiceString;
+	public bool canTalk;
 	public bool firstRun;
 	public int choiceChooser;
 
@@ -39,58 +42,60 @@ public class DialogueController : MonoBehaviour {
 		textBox = this.transform.GetChild(0).gameObject;
 		firstRun = true;
 		canTalk = true;
+
+		this.transform.GetChild (1).gameObject.SetActive (false);
+		this.transform.GetChild (2).gameObject.SetActive (false);
+		this.transform.GetChild (3).gameObject.SetActive (false);
+		this.transform.GetChild (4).gameObject.SetActive (false);
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-		if (dialogueState == DialogueStates.Reading) {
-			textBox.GetComponent<Text>().text = content[currentContent];
+		if (!currentLine.isChoice && NPC != null) {
+			nextLine = NPC.dialogue [currentLine.nextLine];
 		}
-		if (dialogueState == DialogueStates.Choosing) {
-			textBox.GetComponent<Text>().text = choices[choiceChooser].chatDialogue[currentContent];
+
+		if (dialogueState == DialogueStates.Reading && currentLine.command) {
+			textBox.GetComponent<Text> ().text = lastLine.text;
+		} else if(dialogueState == DialogueStates.Reading){
+			textBox.GetComponent<Text>().text = currentLine.text;
+		} else if (dialogueState == DialogueStates.Choosing) {
+			textBox.GetComponent<Text>().text = currentChoice.fluff;
 		}
 
 		if (gameObject.activeSelf == true) {
-			if (canTalk && dialogueState == DialogueStates.Reading && ((Input.GetKeyDown (KeyCode.Return) && chatDone) || Input.GetKeyDown (KeyCode.P))) {
-				if (content [currentContent + 1].Contains ("chatChoice")) {
-					choiceString = content[currentContent+1];
-					Debug.Log("prechoice");
-					Choice (choiceString, NPC);
-				} else if (content [currentContent + 1] == "chatEnd") {
-					ChatClose ();
-				} else if (content[currentContent+1].Contains ("chatContinue")){
-					int q = new int();
-					for (int j = 0; j < content[currentContent + 1].Length; j++) {
-						if (char.IsDigit (content [currentContent + 1] [j])) {
-							q = (content [currentContent + 1] [j])-48;
-						}
-					}
-					currentContent = 0;
-					content = NPC.dialogueText[q].chatDialogue;
-					NPC.chatRoute = q;
-				} else if (content [currentContent + 1].Contains ("chatEnd")) {
-					for (int j = 0; j < content[currentContent + 1].Length; j++) {
-						if (char.IsDigit (content [currentContent + 1] [j])) {
-							int k = (content [currentContent + 1] [j])-48;
-							NPC.chatRoute = k;
-						}
-					}
-					ChatClose ();
-				} else if (content [currentContent] != null) {
-					if(!firstRun){
-						currentContent = currentContent + 1;
+			if (canTalk && dialogueState == DialogueStates.Reading && Input.GetKeyDown (KeyCode.Return)) {
+				if (currentLine.continueType == DialogueLine.ContinueType.Continue){
+					if (currentLine.isChoice) {
+						Choice (NPC.choices [currentLine.nextChoice], NPC);
 					} else {
-						firstRun = false;
+						UpdateDialogue ();
 					}
+				} else if (currentLine.continueType == DialogueLine.ContinueType.CloseAndMove){
+					ChatClose (true);
+				} else if (currentLine.continueType == DialogueLine.ContinueType.End){
+					ChatClose (false);
 				} else {
-					Debug.Log ("ChatMessage.Error when talking to " + talkingTo);
+					Debug.Log ("ChatMessage Error when talking to " + talkingTo);
 
 				}
 			}
 		}
-		if (dialogueState == DialogueStates.Reading) {
 
+		if (dialogueState == DialogueStates.Reading) {
+			if (currentLine.command) {
+				CommandScript.CommandTranslate (currentLine.text);
+				if (currentLine.continueType == DialogueLine.ContinueType.Continue) {
+					UpdateDialogue ();
+				} else if (currentLine.continueType == DialogueLine.ContinueType.End) {
+					ChatClose (false);
+				} else if (currentLine.continueType == DialogueLine.ContinueType.CloseAndMove) {
+					ChatClose (true);
+				} else {
+					Debug.Log ("ChatMessage Error when talking to " + talkingTo);
+				}
+			}
 		} else if (dialogueState == DialogueStates.Choosing) {
 
 		} else {
@@ -99,60 +104,50 @@ public class DialogueController : MonoBehaviour {
 	}
 
 	public void UpdateDialogue(){
-		if (!this.gameObject.activeSelf) {
-			this.gameObject.SetActive(true);
-			content = NPC.dialogueText[NPC.chatRoute].chatDialogue;
-			choices = NPC.dialogueChoices;
-			contentOverall = NPC.dialogueText;
-
+		if (!textBox.activeSelf) {
+			textBox.SetActive (true);
 		}
-		Debug.Log ("Dialogue Updated");
+		if (currentLine != null) {
+			lastLine = currentLine;
+			currentLine = NPC.dialogue [currentLine.nextLine];
+		} else {
+			currentLine = NPC.dialogue [NPC.chatRoute];
+		}
+		canInteract = false;
 	}
 
-	public void Choice(string choiceStr, NPCCharacter npccharacter){
-		Debug.Log ("prestatechange");
+	public void Choice(Choice choice, NPCCharacter npccharacter){
+		currentChoice = choice;
 		dialogueState = DialogueStates.Choosing;
-		Debug.Log ("preforloop");
-		for (int j = 0; j < choiceStr.Length; j++) {
-			Debug.Log (choiceStr+", "+j+", "+choiceStr[j]);
-			if (char.IsDigit (choiceStr[j])) {
-				Debug.Log ("prechoicechooser");
-				choiceChooser = (choiceStr[j])-48;
-				Debug.Log (choiceChooser);
-			}
-		}
-		Debug.Log ("precurrentcontent");
-		currentContent = 0;
 		canTalk = false;
-		for (int i = 1; i < npccharacter.dialogueChoices[choiceChooser].chatDialogue.Count; i++) {
-			GameObject choiceObject = transform.GetChild(i).gameObject;
+		transform.GetChild (0).GetComponent<Text> ().text = choice.fluff;
+		for (int i = 0; i < choice.dialogueOptions.Count; i++) {
+			GameObject choiceObject = transform.GetChild(i+1).gameObject;
+			Debug.Log (choiceObject);
 			choiceObject.SetActive(true);
-			choiceObject.transform.GetChild(0).GetComponent<Text>().text = npccharacter.dialogueChoices[choiceChooser].chatDialogue[i];
-			choiceObject.GetComponent<PlayerChoices>().choiceChooser = choiceChooser;
-			choiceObject.GetComponent<PlayerChoices>().npccharacter = npccharacter;
+			choiceObject.transform.GetChild(0).GetComponent<Text>().text = choice.dialogueOptions[i];
+			choiceObject.GetComponent<PlayerChoices> ().choiceNum = currentLine.nextChoice;
 		}
 	}
 
-	public void ChoiceResponse(int theChiceYouMade, int choiceNumber, NPCCharacter npccharacter){
-		Debug.Log ("Debug 1 "+npccharacter.choiceResults [choiceNumber]);
-		Debug.Log ("Debug 2 "+npccharacter.choiceResults [choiceNumber].chatDialogue);
-		Debug.Log ("Debug 3 "+npccharacter.choiceResults [choiceNumber].chatDialogue[theChiceYouMade][0]);
-		int dialogueChoiceThing = npccharacter.choiceResults [choiceNumber].chatDialogue [theChiceYouMade][0]-48;
-		Debug.Log ("Its just the debug");
-		Debug.Log ("Debug 4 "+npccharacter.dialogueText [dialogueChoiceThing]);
-		Debug.Log ("Debug 5 "+npccharacter.dialogueText [dialogueChoiceThing].chatDialogue[0]);
-
-		content = npccharacter.dialogueText [dialogueChoiceThing].chatDialogue;
-		for(int p = 1; p < gameObject.transform.childCount; p++){
-			gameObject.transform.GetChild(p).gameObject.SetActive(false);
+	public void ChoiceResponse(int theChoiceYouMade, int choiceNumber, NPCCharacter npccharacter){
+		int dialogueChoiceThing = npccharacter.choices[choiceNumber].optionOutcome[theChoiceYouMade];
+		currentLine = npccharacter.dialogue[dialogueChoiceThing];
+		for(int p = 0; p < currentChoice.dialogueOptions.Count; p++){
+			transform.GetChild(p+1).gameObject.SetActive(false);
 		}
 		dialogueState = DialogueStates.Reading;
+		currentChoice = null;
 		canTalk = true;
 	}
 
-	public void ChatClose(){
-		this.gameObject.SetActive (false);
-		currentContent = 0;
+	public void ChatClose(bool changeClose){
+		if (changeClose) {
+			NPC.chatRoute = currentLine.nextLine;
+		}
+		canInteract = true;
 		firstRun = true;
+		textBox.GetComponent<Text> ().text = "";
+		this.gameObject.SetActive (false);
 	}
 }

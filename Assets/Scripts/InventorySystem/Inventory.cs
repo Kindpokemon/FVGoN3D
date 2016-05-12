@@ -204,7 +204,7 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	void addItemAtEmptySlot(Item item)
+	public void addItemAtEmptySlot(Item item)
 	{
 		for (int i = 0; i < Items.Count; i++) {
 
@@ -238,7 +238,7 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 	
-	void addArmorAtEmptySlot(Item item)
+	public void addArmorAtEmptySlot(Item item)
 	{
 		for (int i = 0; i < Items.Count; i++) {
 			

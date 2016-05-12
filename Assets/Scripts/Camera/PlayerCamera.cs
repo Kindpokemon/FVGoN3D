@@ -79,16 +79,23 @@ public class PlayerCamera : MonoBehaviour {
 			lastDistance = distance;
 			playerCam.transform.localPosition = new Vector3 (0, 0, -distance + .2f);
 		}
-		Debug.DrawRay (lookSpot.transform.position, target.transform.forward, Color.blue, 16f);
-		if (Physics.Raycast (lookSpot.transform.position, transform.forward, out hit, 16f)) {
+
+		if (Physics.Raycast (lookSpot.transform.position, transform.forward, out hit, 2f)) {
+			Debug.DrawLine (lookSpot.transform.position, hit.point, Color.blue);
 			if (hit.transform.gameObject.tag == "ChestCollider") {
 				chest.chestImTouching = hit.transform.parent.gameObject;
 				chest.details = chest.chestImTouching.GetComponent<ChestDetails> ();
 				ableToOpen = true;
-			} else {
-				chest.chestImTouching = null;
-				ableToOpen = false;
+			} else if (hit.transform.gameObject.tag == "NPC") {
+				if (Input.GetKeyDown (KeyCode.Return) && refList.dialogueController.canInteract) {
+					refList.dialogueController.NPC = hit.transform.gameObject.GetComponent<NPCCharacter> ();
+					refList.dialogueController.gameObject.SetActive (true);
+					refList.dialogueController.UpdateDialogue ();
+				}
 			}
+		} else {
+			chest.chestImTouching = null;
+			ableToOpen = false;
 		}
 		if (chest.chestImTouching != chest.previouslyTouchedChest && chest.previouslyTouchedChest != null && chest.chestOpen) {
 			chest.previouslyTouchedChest.GetComponent<ChestDetails> ().anim.SetTrigger ("Close");

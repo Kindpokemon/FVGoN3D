@@ -5,18 +5,18 @@ using System.Collections.Generic;
 public class NPCCharacter : MonoBehaviour {
 
 	public DialogueController dialogueController;
-	public List<ChatArray> dialogueText = new List<ChatArray>();
-	public List<ChatArray> dialogueChoices = new List<ChatArray>();
-	public List<ChatArray> choiceResults = new List<ChatArray> ();
+	public List<DialogueLine> dialogue = new List<DialogueLine>();
+	public List<Choice> choices = new List<Choice>();
 	public int chatRoute;
 
-	// Use this for initialization
-	void Start () {
+	public NPCCharacter(){
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public NPCCharacter(DialogueController DC, List<DialogueLine> dia, List<Choice> choi, int currentRoute){
+		dialogueController = DC;
+		dialogue = dia;
+		choices = choi;
+		chatRoute = currentRoute;
 	}
 }

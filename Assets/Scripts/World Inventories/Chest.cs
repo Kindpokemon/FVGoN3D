@@ -91,9 +91,12 @@ public class Chest : MonoBehaviour {
 			chestOpen = true;
 			details.anim.SetTrigger ("Open");
 			gameObject.SetActive (true);
+
 		} else {
 			chestOpen = false;
 			details.anim.SetTrigger ("Close");
+			chestImTouching = null;
+			gameObject.SetActive (false);
 		}
 	}
 

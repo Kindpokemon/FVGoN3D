@@ -12,22 +12,18 @@ public class PlayerChoices : MonoBehaviour {
 	public float yChange = 10;
 	public int currentScale;
 	public GameObject text;
-	public DialogueController dialogueController;
 	public int choiceChooser;
-	public NPCCharacter npccharacter;
+	public int choiceNum;
+	public ReferenceList reflist;
 
 	void Start(){
-
+		reflist = GameObject.FindGameObjectWithTag ("reflist").GetComponent<ReferenceList> ();
 		text = transform.parent.GetChild (0).gameObject;
 
 	}
 
 	public void MakeAGoddamnChoice(){
-		Debug.Log (chatButton);
-		Debug.Log (choiceChooser);
-		Debug.Log (npccharacter);
-
-		dialogueController.ChoiceResponse (chatButton, choiceChooser, npccharacter);
+		reflist.dialogueController.ChoiceResponse (chatButton, choiceNum, reflist.dialogueController.NPC);
 	}
 
 }

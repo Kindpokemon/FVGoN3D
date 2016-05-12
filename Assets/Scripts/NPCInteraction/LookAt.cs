@@ -29,7 +29,6 @@ public class LookAt : MonoBehaviour {
 
 	void LateUpdate ()
 	{
-		Debug.Log ("Honkro");
 		lookAtTargetPosition.y = head.position.y;
 		float lookAtTargetWeight = looking ? 1.0f : 0.0f;
 

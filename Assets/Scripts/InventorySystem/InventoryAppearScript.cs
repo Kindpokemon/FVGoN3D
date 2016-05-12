@@ -15,6 +15,7 @@ public class InventoryAppearScript : MonoBehaviour {
 	public GameObject HUD;
 	public bool escIsShowing;
 	public GameObject escMenu;
+	public bool textboxShowing;
 
 	void Start(){
 		reflist = GameObject.FindGameObjectWithTag ("reflist").GetComponent<ReferenceList> ();
@@ -22,53 +23,52 @@ public class InventoryAppearScript : MonoBehaviour {
 	}
 
 	void Update () {
-
-		if (Input.GetKeyDown (KeyCode.E)) {
-			//Debug.Log ("From Appear: " + Game.current.player.name);
-			if (!escIsShowing) {
-				if (isShowing) {
-					isShowing = false;
-					menu.SetActive (false);
-					chestMenu.SetActive (false);
-				} else {
-					isShowing = true;
-					menu.SetActive (true);
-				}
-				if (reflist.playerCamera.ableToOpen) {
-					if (reflist.chest.chestOpen) {
-						reflist.chest.ToggleChest (false);
+		textboxShowing = reflist.dialogueController.gameObject.activeSelf;
+		if (!textboxShowing) {
+			if (Input.GetKeyDown (KeyCode.E)) {
+				//Debug.Log ("From Appear: " + Game.current.player.name);
+				if (!escIsShowing) {
+					if (isShowing) {
+						isShowing = false;
+						menu.SetActive (false);
 					} else {
-						reflist.chest.ToggleChest (true);
+						isShowing = true;
+						menu.SetActive (true);
+					}
+					if (reflist.playerCamera.ableToOpen && reflist.chest.chestImTouching != null) {
+						if (reflist.chest.chestOpen) {
+							reflist.chest.ToggleChest (false);
+						} else {
+							reflist.chest.ToggleChest (true);
+						}
 					}
 				}
+				if (isShowing && reflist.inventory.draggingItem && !reflist.inventory.draggedItemGameObject.activeSelf) {
+					reflist.inventory.dragRetention ();
+				}
 			}
-			if (isShowing && reflist.inventory.draggingItem && !reflist.inventory.draggedItemGameObject.activeSelf) {
-				reflist.inventory.dragRetention ();
-			}
-		}
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			if (isShowing) {
-				isShowing = false;
-				escIsShowing = true;
-				menu.SetActive (false);
-				chestMenu.SetActive (false);
-				escMenu.SetActive (true);
-			} else if (escIsShowing) {
-				escIsShowing = false;
-				escMenu.SetActive (false);
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				if (isShowing) {
+					isShowing = false;
+					escIsShowing = true;
+					menu.SetActive (false);
+					escMenu.SetActive (true);
+				} else if (escIsShowing) {
+					escIsShowing = false;
+					escMenu.SetActive (false);
 
-			} else {
-				escIsShowing = true;
-				escMenu.SetActive (true);
-				menu.SetActive (false);
-				chestMenu.SetActive (false);
-			}
-			if (!isShowing && reflist.chest.chestOpen) {
-				reflist.chest.ToggleChest (false);
+				} else {
+					escIsShowing = true;
+					escMenu.SetActive (true);
+					menu.SetActive (false);
+				}
+				if (!isShowing && reflist.chest.chestOpen && reflist.chest.chestImTouching != null) {
+					reflist.chest.ToggleChest (false);
+				}
 			}
 		}
 
-		if (isShowing == false && escIsShowing == false) {
+		if (!isShowing && !escIsShowing && !textboxShowing) {
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 			reflist.playerControl.movementEnabled = true;

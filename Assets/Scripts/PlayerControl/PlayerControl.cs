@@ -29,7 +29,6 @@ public class PlayerControl : MonoBehaviour {
 		if (movementEnabled) {
 			moveH = Input.GetAxis ("Horizontal");
 			moveV = Input.GetAxis ("Vertical");
-			Debug.Log (moveH + ", " + moveV);
 			anim.SetFloat ("InputY", moveV, 1f, Time.deltaTime * 10f);
 			anim.SetFloat ("InputX", moveH, 1f, Time.deltaTime * 10f);
 			if (Input.GetButtonDown ("Crouch")) {

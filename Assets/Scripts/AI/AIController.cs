@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour {
 	Vector3 worldDeltaPosition;
 	Vector2 velocity = Vector2.zero;
 	Vector3 previousPosition;
+	Vector3 playerOrigin;
 	Animator anim;
 
 	float distance;
@@ -82,6 +83,7 @@ public class AIController : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent> ();
 		reflist = GameObject.FindGameObjectWithTag ("reflist").GetComponent<ReferenceList>();
 		lookAt = GetComponent<LookAt> ();
+		playerOrigin = transform.position;
 		// Don’t update position automatically
 		agent.updatePosition = false;
 		anim.applyRootMotion = false;
@@ -99,11 +101,13 @@ public class AIController : MonoBehaviour {
 		return spotCalc;
 	}
 
-	public Vector3 RandomNavSphere (Vector3 origin, float distance, int layermask) {
+	Vector3 RandomNavSphere (Vector3 origin, float distance, int layermask) {
 		Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
 		randomDirection += origin;
 		NavMeshHit navHit;
-		NavMesh.SamplePosition (randomDirection, out navHit, distance, layermask);
+		Debug.Log (randomDirection+", "+ distance);
+		NavMesh.SamplePosition (randomDirection, out navHit, distance, 1 << NavMesh.GetAreaFromName("Default"));
+		Debug.Log (navHit.position);
 		return navHit.position;
 	}
 
@@ -155,12 +159,12 @@ public class AIController : MonoBehaviour {
 			if (!shouldMove) {
 				if (currentWait <= 0) {
 					currentWait = Random.Range (wanderWait [0], wanderWait [1]);
-					newPos = RandomNavSphere (transform.position, Random.Range (wanderRange [0], wanderRange [1]), 0);
+					newPos = RandomNavSphere (playerOrigin, Random.Range (wanderRange [0], wanderRange [1]), 0);
 				} else {
 					currentWait = currentWait - Time.deltaTime;
 				}
 			}
-			MovementCalc (newPos, false, false);
+			MovementCalc (newPos, false, true);
 		} else if (currentAI == CurrentAI.Idle) {
 			
 		}
@@ -178,9 +182,10 @@ public class AIController : MonoBehaviour {
 		transform.position = position;
 	}
 
-	void MovementCalc(Vector3 targetPos, bool crouch, bool forceSprint){
+	void MovementCalc(Vector3 targetPos, bool crouch, bool forceWalk){
 
 		agent.destination = targetPos;
+		Debug.Log (agent.destination);
 		worldDeltaPosition = agent.nextPosition - transform.position;
 		if (crouch) {
 			anim.SetBool ("Crouch", true);
@@ -188,7 +193,7 @@ public class AIController : MonoBehaviour {
 			anim.SetBool ("Crouch", false);
 		}
 
-		if (forceSprint || Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) >= runDistance && !anim.GetBool("Crouch")) {
+		if (!forceWalk && Vector3.Distance (new Vector3 (transform.position.x, 0, transform.position.z), new Vector3 (targetPos.x, 0, targetPos.z)) >= runDistance && !anim.GetBool("Crouch")) {
 			anim.SetBool ("Sprint", true);
 		} else {
 			anim.SetBool ("Sprint", false);

@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DialogueEditor\Tutorial\Tutorial.cs" />
      <Compile Include="Assets\Scripts\AI\AIController.cs" />
      <Compile Include="Assets\Scripts\AttackInfo\Attack.cs" />
      <Compile Include="Assets\Scripts\AttackInfo\AttackDatabase.cs" />
@@ -61,6 +60,7 @@
      <Compile Include="Assets\Scripts\InventorySystem\ItemDatabase.cs" />
      <Compile Include="Assets\Scripts\InventorySystem\SlotScript.cs" />
      <Compile Include="Assets\Scripts\InventorySystem\UIRender.cs" />
+     <Compile Include="Assets\Scripts\Menu\CommandScript.cs" />
      <Compile Include="Assets\Scripts\Menu\Console.cs" />
      <Compile Include="Assets\Scripts\Menu\DevOptions.cs" />
      <Compile Include="Assets\Scripts\Menu\ExitScript.cs" />
@@ -70,8 +70,9 @@
      <Compile Include="Assets\Scripts\Menu\StaticStats.cs" />
      <Compile Include="Assets\Scripts\MovementSystem\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\MovementSystem\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\NPCInteraction\ChatArray.cs" />
+     <Compile Include="Assets\Scripts\NPCInteraction\Choice.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\DialogueController.cs" />
+     <Compile Include="Assets\Scripts\NPCInteraction\DialogueLine.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\LookAt.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\NPC.cs" />
      <Compile Include="Assets\Scripts\NPCInteraction\NPCCharacter.cs" />
@@ -111,12 +112,10 @@
      <Compile Include="Assets\Steer2D\Scripts\SteeringAgent.cs" />
      <Compile Include="Assets\Steer2D\Scripts\SteeringBehaviour.cs" />
      <None Include="Assets\Resources\PlayerRep\Clothes Ideas.txt" />
-     <None Include="Assets\DialogueEditor\Readme.txt" />
      <None Include="Assets\Resources\Can Do.txt" />
      <None Include="Assets\Resources\PlayerRep\citystuff.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\CharacterSprites\poses.txt" />
-     <None Include="Assets\DialogueEditor\Tutorial\Tutorial.xml" />
      <None Include="Assets\Raw Mocap Data\Animations\_CompleteAnimationList.txt" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />

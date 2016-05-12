@@ -11,6 +11,7 @@ public class ReferenceList : MonoBehaviour {
 	public ItemDatabase database;
 	public AttackDatabase atkDatabase;
 	public List<Transform> hidingSpots;
+	public DialogueController dialogueController;
 
 	// Use this for initialization
 	void Start () {

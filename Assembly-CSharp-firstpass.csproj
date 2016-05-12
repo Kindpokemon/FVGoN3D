@@ -99,12 +99,10 @@
      <Compile Include="Assets\Standard Assets\Utility\WaypointCircuit.cs" />
      <Compile Include="Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
      <None Include="Assets\Resources\PlayerRep\Clothes Ideas.txt" />
-     <None Include="Assets\DialogueEditor\Readme.txt" />
      <None Include="Assets\Resources\Can Do.txt" />
      <None Include="Assets\Resources\PlayerRep\citystuff.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\CharacterSprites\poses.txt" />
-     <None Include="Assets\DialogueEditor\Tutorial\Tutorial.xml" />
      <None Include="Assets\Raw Mocap Data\Animations\_CompleteAnimationList.txt" />
      <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
