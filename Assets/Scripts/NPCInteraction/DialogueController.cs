@@ -34,6 +34,7 @@ public class DialogueController : MonoBehaviour {
 	public bool canTalk;
 	public bool firstRun;
 	public int choiceChooser;
+	private int spriteNumber;
 
 	// Use this for initialization
 	void Start () {
@@ -149,5 +150,17 @@ public class DialogueController : MonoBehaviour {
 		firstRun = true;
 		textBox.GetComponent<Text> ().text = "";
 		this.gameObject.SetActive (false);
+	}
+
+	public void UpdateTalkSprites(Image img, List<Sprite> sprites){
+		
+	}
+
+	public void UpdateTalkSprites(Image image, DialogueLine line){
+		UpdateTalkSprites (image, line.sprites);
+	}
+
+	public void UpdateTalkSprites(Image image, Choice choice){
+		UpdateTalkSprites (image, choice.sprites);
 	}
 }

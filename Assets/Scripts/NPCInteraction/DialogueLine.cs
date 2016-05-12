@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class DialogueLine {
 
 	//Content
 	public string text;
-	public string emotion;
+	public List<Sprite> sprites;
 
 	//Execution
 	public int nextLine;
@@ -26,22 +27,22 @@ public class DialogueLine {
 
 	}
 
-	public DialogueLine(string dia, string emote, int nextLin){
+	public DialogueLine(string dia, List<Sprite> emote, int nextLin){
 		text = dia;
-		emotion = emote;
+		sprites = emote;
 		nextLine = nextLin;
 	}
 
-	public DialogueLine(string dia, string emote, int nextLin, bool com){
+	public DialogueLine(string dia, List<Sprite> emote, int nextLin, bool com){
 		text = dia;
-		emotion = emote;
+		sprites = emote;
 		nextLine = nextLin;
 		command = com;
 	}
 
-	public DialogueLine(string dia, string emote, bool choi, int nextChoi){
+	public DialogueLine(string dia, List<Sprite> emote, bool choi, int nextChoi){
 		text = dia;
-		emotion = emote;
+		sprites = emote;
 		nextChoice = nextChoi;
 		isChoice = choi;
 

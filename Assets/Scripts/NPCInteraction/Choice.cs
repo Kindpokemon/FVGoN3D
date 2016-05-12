@@ -7,17 +7,17 @@ public class Choice {
 
 	public List<string> dialogueOptions;
 	public List<int> optionOutcome;
-	public string emotion;
+	public List<Sprite> sprites;
 	public string fluff;
 
 	public Choice(){
 
 	}
 
-	public Choice(List<string> options, List<int> outcomes, string emote, string floof){
+	public Choice(List<string> options, List<int> outcomes, List<Sprite> emote, string floof){
 		dialogueOptions = options;
 		optionOutcome = outcomes;
-		emotion = emote;
+		sprites = emote;
 		fluff = floof;
 	}
 }

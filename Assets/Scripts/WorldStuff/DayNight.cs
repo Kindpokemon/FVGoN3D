@@ -34,19 +34,16 @@ public class DayNight : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (degreesRotated < 360) {
-			Sun.Rotate (new Vector3 (_degreeRotation, 0, 0) * Time.deltaTime);
-			degreesRotated += _degreeRotation*Time.deltaTime;
+		Sun.Rotate (new Vector3 (_degreeRotation, 0, 0) * Time.deltaTime);
+		degreesRotated += _degreeRotation * Time.deltaTime;
 
-			_timeofDay += Time.deltaTime;
-			Debug.Log (_degreeRotation);
-			currentSeconds += (int)Mathf.Floor ((_degreeRotation*Time.deltaTime)*10.39f*24);
-			currentMinutes = currentSeconds / 60;
-			currentHours = currentMinutes / 60;
-			currentDays = currentHours / 24;
-			currentMonths = currentDays / 30;
-			currentYears = currentMonths / 12;
-			Debug.Log ("Seconds: " + currentSeconds + ", Minutes: " + currentMinutes + ", Hours: " + currentHours + ", Days: " + currentDays);
-		}
+		_timeofDay += Time.deltaTime;
+		Debug.Log (_degreeRotation);
+		currentSeconds += (int)Mathf.Floor ((_degreeRotation * Time.deltaTime) * 10.39f * 24);
+		currentMinutes = currentSeconds / 60;
+		currentHours = currentMinutes / 60;
+		currentDays = currentHours / 24;
+		currentMonths = currentDays / 30;
+		currentYears = currentMonths / 12;
 	}
 }

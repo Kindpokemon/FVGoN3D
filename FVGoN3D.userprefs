@@ -1,15 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WorldStuff\DayNight.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\NPCInteraction\DialogueController.cs">
     <Files>
-      <File FileName="Assets\Scripts\WorldStuff\DayNight.cs" Line="43" Column="82" />
-      <File FileName="Assets\Scripts\NPCInteraction\PlayerChoices.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NPCInteraction\DialogueController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NPCInteraction\NPCCharacter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NPCInteraction\DialogueLine.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\NPCInteraction\DialogueController.cs" Line="156" Column="3" />
       <File FileName="Assets\Scripts\Menu\CommandScript.cs" Line="27" Column="43" />
-      <File FileName="Assets\Scripts\InventorySystem\Inventory.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Camera\PlayerCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\NPCInteraction\DialogueLine.cs" Line="45" Column="10" />
+      <File FileName="Assets\Scripts\NPCInteraction\Choice.cs" Line="17" Column="58" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
